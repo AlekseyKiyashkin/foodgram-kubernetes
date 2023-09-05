@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: foodgram
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: kryssperer/foodgram-backend
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+          - mountPath: /app/static/
+            name: static
+          - mountPath: /app/media/
+            name: media
+          - mountPath: /app/api/docs/
+            name: redoc
+        envFrom:
+        - configMapRef:
+            name: db-configmap
+        - secretRef:
+            name: db-secret
+      volumes:
+        - name: static
+          persistentVolumeClaim:
+            claimName: static-pvc
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-pvc
+        - name: redoc
+          persistentVolumeClaim:
+            claimName: redoc-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  selector:
+    app: myapp
+  ports:
+  - port: 8000
+    targetPort: 8000
