@@ -24,6 +24,8 @@ spec:
         volumeMounts:
           - mountPath: /app/media/
             name: media
+          - mountPath: /app/static/
+            name: static
         envFrom:
         - configMapRef:
             name: db-configmap
@@ -33,6 +35,9 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media-pvc
+        - name: static
+          persistentVolumeClaim:
+            claimName: static-pvc
 ---
 apiVersion: v1
 kind: Service

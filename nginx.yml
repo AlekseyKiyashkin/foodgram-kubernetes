@@ -31,6 +31,9 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media-pvc
+        - name: static
+          persistentVolumeClaim:
+            claimName: static-pvc
 ---
 apiVersion: v1
 kind: Service
