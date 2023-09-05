@@ -40,3 +40,17 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: nfs-client
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: result-build-pvc
+  namespace: foodgram
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs-client

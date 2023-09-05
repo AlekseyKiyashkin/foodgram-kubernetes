@@ -22,35 +22,26 @@ spec:
         ports:
         - containerPort: 8000
         volumeMounts:
-          - mountPath: /app/static/
-            name: static
           - mountPath: /app/media/
             name: media
-          - mountPath: /app/api/docs/
-            name: redoc
         envFrom:
         - configMapRef:
             name: db-configmap
         - secretRef:
             name: db-secret
       volumes:
-        - name: static
-          persistentVolumeClaim:
-            claimName: static-pvc
         - name: media
           persistentVolumeClaim:
             claimName: media-pvc
-        - name: redoc
-          persistentVolumeClaim:
-            claimName: redoc-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: myapp
+  name: backend
 spec:
   selector:
-    app: myapp
+    app: backend
+  type: NodePort
   ports:
   - port: 8000
     targetPort: 8000

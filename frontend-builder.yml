@@ -19,17 +19,10 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "250m"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: result_build
-  namespace: foodgram
-spec:
-  resources:
-    requests:
-      storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteMany
-  storageClassName: nfs-client
+        volumeMounts:
+          - mountPath: /app/result_build/
+            name: result-build
+      volumes:
+        - name: result-build
+          persistentVolumeClaim:
+            claimName: result-build-pvc
