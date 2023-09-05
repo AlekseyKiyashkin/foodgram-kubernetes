@@ -1,4 +1,4 @@
-FROM kryssperer/foodgram-front:2.8 as build
+FROM kryssperer/foodgram-frontend:2.8 as build
 
 
 FROM nginx:1.19.3
