@@ -1,10 +1,5 @@
-FROM node:13.12.0-alpine as build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . ./
-RUN npm run build
-RUN uptime
+FROM kryssperer/foddgram-front as build
+
 
 FROM nginx:1.19.3
 RUN pwd
