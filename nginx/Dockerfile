@@ -1,4 +1,4 @@
-FROM kryssperer/foddgram-front as build
+FROM kryssperer/foddgram-front:2.8 as build
 
 
 FROM nginx:1.19.3
